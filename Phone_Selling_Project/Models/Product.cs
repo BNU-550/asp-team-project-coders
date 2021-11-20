@@ -47,4 +47,3 @@ namespace Phone_Selling_Project.Models
         public int Ram { get; set; }
     }
 }
-//PDF gett
