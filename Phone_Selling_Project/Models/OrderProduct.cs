@@ -10,23 +10,18 @@ namespace Phone_Selling_Project.Models
 {
     public class OrderProduct
     {
-        [ForeignKey("ID")]
+        [ForeignKey("ID"), Key]
         public int OrderID { get; set; }
 
-        [ForeignKey("ID")]
+        [ForeignKey("ID"), Key]
         public int ProductID { get; set; }
-
-
-        private decimal _SalePrice;
-        public decimal SalePrice 
-        {
-            get { return Math.Round(_SalePrice, 2); }
-
-            set { _SalePrice = value; }
-        }
+        
+        [Range(0, 2000), DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
+        public decimal UnitPrice  { get; set; }
 
         [Required, StringLength(2), DisplayName("Quantity")]
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } = 1;
 
         
     }

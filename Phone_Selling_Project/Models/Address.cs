@@ -11,11 +11,7 @@ namespace Phone_Selling_Project.Models
     public class Address
     {
         [Key]
-
         public int ID { get; set; }
-
-        [ForeignKey("ID")]
-        public int PersonID { get; set; }
 
         [Required, StringLength(25), DisplayName("House Name")]
         public string HouseName { get; set; }

@@ -9,6 +9,8 @@ namespace Phone_Selling_Project.Models
         [Key]
         public int ID { get; set; }
 
+        public int AddressID {get;set;}
+
         [Required (ErrorMessage = "The First name address is required"), StringLength(20)]
         public string FirstName { get; set; }
 
@@ -30,8 +32,14 @@ namespace Phone_Selling_Project.Models
         [RegularExpression(@"^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string MobileNumber { get; set; }
 
+        public bool isStaff { get; set; } = false;
+
         // Calculated Fields
         public string FullName { get { return FirstName + ", " + LastName; } }
+
+        // navigation property
+
+        public virtual Address Address { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,18 +19,15 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage = "Enter a product description"), StringLength(50)]
         public string Description { get; set; }
 
-        private decimal _Price;
+        [Range(0, 2000), DataType(DataType.Currency)]
+        [Column(TypeName = "money")]
         [Required, DisplayName("Price")]
-        public decimal Price
-        {
-            get { return Math.Round(_Price, 2); }
+        public decimal Price { get; set; }
 
-            set { _Price = value; }
-        }
+        [Range(0, 10)]
+        public int StockLevel { get; set; }
 
-        [StringLength(10)]
-        public int? StockLevel { get; set; }
-
+        [Range(3, 16)]
         [Required(ErrorMessage = "Enter a storage Value"), StringLength(4)]
         public int MemoryStorage { get; set; }
 
@@ -37,13 +35,12 @@ namespace Phone_Selling_Project.Models
         public string Colour { get; set; }
 
         [Required(ErrorMessage = "Enter a Screen Size"), StringLength(3)]
-        public int ScreenSize { get; set; }
+        public double ScreenSize { get; set; }
 
         // How to store image on database? base64?
-        [Required]
         public string Image { get; set; }
 
-        [Required(ErrorMessage ="Enter Ram size"), StringLength(3)]
+        [Required(ErrorMessage ="Enter Ram size")]
         public int Ram { get; set; }
     }
 }
