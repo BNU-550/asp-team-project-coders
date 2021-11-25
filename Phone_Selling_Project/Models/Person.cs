@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
 
 namespace Phone_Selling_Project.Models
 {
@@ -23,7 +19,7 @@ namespace Phone_Selling_Project.Models
         [DisplayName("Date of Birth"), DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        [DisplayName("Email address")]
+        [DisplayName("Email address"), StringLength(80)]
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
@@ -33,6 +29,9 @@ namespace Phone_Selling_Project.Models
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string MobileNumber { get; set; }
+
+        // Calculated Fields
+        public string FullName { get { return FirstName + ", " + LastName; } }
 
     }
 }
