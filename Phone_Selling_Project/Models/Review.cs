@@ -17,7 +17,13 @@ namespace Phone_Selling_Project.Models
         public int PersonID { get; set; }
 
         [Required (ErrorMessage = "Please Enter Your Review")]
-        [StringLength(256), DataType(DataType.MultilineText]
+        [StringLength(256), DataType(DataType.MultilineText)]
         public string Text { get; set; }
+
+        // Navigation properties
+
+        public Product Product { get; set; }
+
+        public Person Person { get; set; }
     }
 }

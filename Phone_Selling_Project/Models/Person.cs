@@ -40,6 +40,7 @@ namespace Phone_Selling_Project.Models
         // navigation property
 
         public virtual Address Address { get; set; }
+        public virtual Payment Payment { get; set; }
 
     }
 }

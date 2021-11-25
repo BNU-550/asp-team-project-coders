@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Phone_Selling_Project.Data;
 
 namespace Phone_Selling_Project.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211125111047_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,7 +262,12 @@ namespace Phone_Selling_Project.Data.Migrations
                     b.Property<int>("ExpiryYear")
                         .HasColumnType("int");
 
+                    b.Property<int>("PersonID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("PersonID");
 
                     b.ToTable("Payments");
                 });
@@ -297,17 +304,12 @@ namespace Phone_Selling_Project.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PaymentID")
-                        .HasColumnType("int");
-
                     b.Property<bool>("isStaff")
                         .HasColumnType("bit");
 
                     b.HasKey("ID");
 
                     b.HasIndex("AddressID");
-
-                    b.HasIndex("PaymentID");
 
                     b.ToTable("Persons");
                 });
@@ -363,6 +365,17 @@ namespace Phone_Selling_Project.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Phone_Selling_Project.Models.Payment", b =>
+                {
+                    b.HasOne("Phone_Selling_Project.Models.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+                });
+
             modelBuilder.Entity("Phone_Selling_Project.Models.Person", b =>
                 {
                     b.HasOne("Phone_Selling_Project.Models.Address", "Address")
@@ -371,13 +384,7 @@ namespace Phone_Selling_Project.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Phone_Selling_Project.Models.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentID");
-
                     b.Navigation("Address");
-
-                    b.Navigation("Payment");
                 });
 #pragma warning restore 612, 618
         }

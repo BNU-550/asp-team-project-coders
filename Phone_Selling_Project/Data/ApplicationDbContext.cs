@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Phone_Selling_Project.Models;
 
 namespace Phone_Selling_Project.Data
 {
@@ -12,5 +10,11 @@ namespace Phone_Selling_Project.Data
             : base(options)
         {
         }
+
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+
+
     }
 }
