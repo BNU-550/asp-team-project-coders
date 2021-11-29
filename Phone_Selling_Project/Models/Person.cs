@@ -21,7 +21,7 @@ namespace Phone_Selling_Project.Models
         [DisplayName("Date of Birth"), DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        [DisplayName("Email address"), StringLength(80)]
+        [DisplayName("Email address"), StringLength(80), DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "The email address is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
@@ -29,7 +29,9 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage = "You must provide a phone number")]
         [Display(Name = "MobileNumber")]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        //ToDo: Regex or datatype check when built!
+       // [RegularExpression(@"^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
+       // , ErrorMessage = "Not a valid phone number")]
         public string MobileNumber { get; set; }
 
         public bool isStaff { get; set; } = false;
@@ -40,6 +42,7 @@ namespace Phone_Selling_Project.Models
         // navigation property
 
         public virtual Address Address { get; set; }
+        // ToDo:Picking up FK check.
         public virtual Payment Payment { get; set; }
 
     }

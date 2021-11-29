@@ -16,31 +16,35 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage = "Enter a product name"), StringLength(30)]
         public string ProductName { get; set; }
 
-        [Required(ErrorMessage = "Enter a product description"), StringLength(50)]
+        [Required(ErrorMessage = "Enter a product description"), StringLength(256)]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Range(0, 2000), DataType(DataType.Currency)]
+        [Range(500, 2000), DataType(DataType.Currency)]
         [Column(TypeName = "money")]
-        [Required, DisplayName("Price")]
+        [Required, DisplayName("Price")]  // = 500.00m;
         public decimal Price { get; set; }
 
         [Range(0, 10)]
         public int StockLevel { get; set; }
 
-        [Range(3, 16)]
-        [Required(ErrorMessage = "Enter a Storage Value in Mbs"), StringLength(4)]
+        [Range(128, 512)]
+        [Required(ErrorMessage = "Enter a Storage Value in Gbs"), StringLength(4)]
         public int MemoryStorage { get; set; }
 
-        [Required(ErrorMessage = "Enter a Colour"), StringLength(15)]
-        public string Colour { get; set; }
+        [Required(ErrorMessage = "Enter a Colour")]
+        public Colours Colour { get; set; } = Colours.White;
 
         [Required(ErrorMessage = "Enter a Screen Size in Inches"), StringLength(3)]
         public double ScreenSize { get; set; }
 
         // How to store image on database? base64?
-        public string Image { get; set; }
+        // Limited scope for uploading images due to solo? 
+        public string ImageFileName { get; set; }
 
-        [Required(ErrorMessage ="Enter Ram size")]
+        [Required(ErrorMessage ="Enter Ram size in Gbs"), Range(3, 16)]
         public int Ram { get; set; }
+
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

@@ -22,8 +22,8 @@ namespace Phone_Selling_Project.Models
 
         // Navigation properties
 
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
-        public Person Person { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

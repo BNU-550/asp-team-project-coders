@@ -28,6 +28,8 @@ namespace Phone_Selling_Project.Models
         // Navigation Property
 
         public Person Customer { get; set; }
+
+        public virtual ICollection<OrderProduct> OrderProducts {get; set;}
     }
 
 

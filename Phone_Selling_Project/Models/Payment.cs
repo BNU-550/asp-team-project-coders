@@ -13,8 +13,6 @@ namespace Phone_Selling_Project.Models
         [Key]
         public int ID { get; set; }
 
-        public int PersonID { get; set; }
-
         [Required, DisplayName("Date")]
         [Range(1,12)]
         public int ExpiryMonth { get; set; }
@@ -31,6 +29,5 @@ namespace Phone_Selling_Project.Models
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Not a valid Csc Code")]
         protected int SecurityCode { get; set; }
 
-        public virtual Person People { get; set; }
     }
 }

@@ -15,14 +15,19 @@ namespace Phone_Selling_Project.Models
 
         [ForeignKey("ID"), Key]
         public int ProductID { get; set; }
-        
+
         [Range(0, 2000), DataType(DataType.Currency)]
         [Column(TypeName = "money")]
-        public decimal UnitPrice  { get; set; }
+        public decimal UnitPrice { get; set; }
 
         [Required, StringLength(2), DisplayName("Quantity")]
         public int Quantity { get; set; } = 1;
 
+        // Navigation 
+
+        public virtual Product Product {get ;set;}
+
+        public virtual Order Order { get; set; }
         
     }
 }
