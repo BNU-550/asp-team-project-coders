@@ -13,19 +13,11 @@ namespace Phone_Selling_Project.Models
         [Key]
         public int ID { get; set; }
 
-        [Required, StringLength(25), DisplayName("House Name")]
-        public string HouseName { get; set; }
-
-        //Not required not all houses have numbers
-        [DisplayName("House Number")]
-        public int? HouseNumber { get; set; }
+        [Required, StringLength(25), DisplayName("House Name or Number")]
+        public string HouseNameNumber { get; set; }
 
         [Required, DisplayName("Post Code"), DataType(DataType.PostalCode)]
         public string PostCode { get; set; }
-
-        [Required ,DisplayName("Country")]
-        [RegularExpression(@"/^[A-Z]+$/i", ErrorMessage = "Please only enter numbers")]
-        public string Country { get; set; }
 
         
 

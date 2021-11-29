@@ -28,13 +28,13 @@ namespace Phone_Selling_Project.Models
         public int StockLevel { get; set; }
 
         [Range(3, 16)]
-        [Required(ErrorMessage = "Enter a storage Value"), StringLength(4)]
+        [Required(ErrorMessage = "Enter a Storage Value in Mbs"), StringLength(4)]
         public int MemoryStorage { get; set; }
 
         [Required(ErrorMessage = "Enter a Colour"), StringLength(15)]
         public string Colour { get; set; }
 
-        [Required(ErrorMessage = "Enter a Screen Size"), StringLength(3)]
+        [Required(ErrorMessage = "Enter a Screen Size in Inches"), StringLength(3)]
         public double ScreenSize { get; set; }
 
         // How to store image on database? base64?
