@@ -10,6 +10,7 @@ namespace Phone_Selling_Project.Models
         public int ID { get; set; }
 
         public int AddressID {get;set;}
+        public int PaymentID { get; set; }
 
         [Required (ErrorMessage = "The First name address is required"), StringLength(20)]
         public string FirstName { get; set; }
@@ -23,11 +24,11 @@ namespace Phone_Selling_Project.Models
 
         [DisplayName("Email address"), StringLength(80), DataType(DataType.EmailAddress)]
         [Required(ErrorMessage = "The email address is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        //[EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "You must provide a phone number")]
-        [Display(Name = "MobileNumber")]
+        [Display(Name = "Mobile Number")]
         [DataType(DataType.PhoneNumber)]
         //ToDo: Regex or datatype check when built!
        // [RegularExpression(@"^(?([0-9]{3}))?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
