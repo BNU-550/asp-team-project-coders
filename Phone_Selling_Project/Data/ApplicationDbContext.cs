@@ -17,6 +17,5 @@ namespace Phone_Selling_Project.Data
         public DbSet<OrderProduct> OrderProducts {get; set;}
         public DbSet<Product> Products { get; set; }
 
-
     }
 }
