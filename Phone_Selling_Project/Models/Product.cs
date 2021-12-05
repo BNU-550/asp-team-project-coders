@@ -33,7 +33,7 @@ namespace Phone_Selling_Project.Models
         public int MemoryStorage { get; set; }
 
         [Required(ErrorMessage = "Enter a Colour")]
-        public Colours Colour { get; set; } = Colours.White;
+        public Colours Colour { get; set; } = Colours.SpaceGrey;
 
         [Required(ErrorMessage = "Enter a Screen Size in Inches"), StringLength(3)]
         public double ScreenSize { get; set; }

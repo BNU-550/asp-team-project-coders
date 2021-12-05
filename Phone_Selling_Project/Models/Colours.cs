@@ -7,6 +7,6 @@ namespace Phone_Selling_Project.Models
 {
     public enum Colours
     {
-     White, Black, Yellow
+        SpaceGrey, Black, Yellow
     }
 }

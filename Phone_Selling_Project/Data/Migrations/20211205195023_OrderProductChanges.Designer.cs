@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Phone_Selling_Project.Data;
 
 namespace Phone_Selling_Project.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211205195023_OrderProductChanges")]
+    partial class OrderProductChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,61 +242,6 @@ namespace Phone_Selling_Project.Data.Migrations
                     b.ToTable("Addresses");
                 });
 
-            modelBuilder.Entity("Phone_Selling_Project.Models.Order", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CustomerID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateDelivered")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateOrdered")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CustomerID");
-
-                    b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("Phone_Selling_Project.Models.OrderProduct", b =>
-                {
-                    b.Property<int>("OrderID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("OrderID1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasMaxLength(2)
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("money");
-
-                    b.HasKey("OrderID");
-
-                    b.HasIndex("OrderID1");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("OrderProducts");
-                });
-
             modelBuilder.Entity("Phone_Selling_Project.Models.Payment", b =>
                 {
                     b.Property<int>("ID")
@@ -360,51 +307,6 @@ namespace Phone_Selling_Project.Data.Migrations
                     b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("Phone_Selling_Project.Models.Product", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Colour")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("ImageFileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MemoryStorage")
-                        .HasMaxLength(4)
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("Ram")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ScreenSize")
-                        .HasMaxLength(3)
-                        .HasColumnType("float");
-
-                    b.Property<int>("StockLevel")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -456,32 +358,6 @@ namespace Phone_Selling_Project.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Phone_Selling_Project.Models.Order", b =>
-                {
-                    b.HasOne("Phone_Selling_Project.Models.Person", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID");
-
-                    b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("Phone_Selling_Project.Models.OrderProduct", b =>
-                {
-                    b.HasOne("Phone_Selling_Project.Models.Order", "Order")
-                        .WithMany("OrderProducts")
-                        .HasForeignKey("OrderID1");
-
-                    b.HasOne("Phone_Selling_Project.Models.Product", "Product")
-                        .WithMany("OrderProducts")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Phone_Selling_Project.Models.Person", b =>
                 {
                     b.HasOne("Phone_Selling_Project.Models.Address", "Address")
@@ -499,16 +375,6 @@ namespace Phone_Selling_Project.Data.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("Payment");
-                });
-
-            modelBuilder.Entity("Phone_Selling_Project.Models.Order", b =>
-                {
-                    b.Navigation("OrderProducts");
-                });
-
-            modelBuilder.Entity("Phone_Selling_Project.Models.Product", b =>
-                {
-                    b.Navigation("OrderProducts");
                 });
 #pragma warning restore 612, 618
         }
