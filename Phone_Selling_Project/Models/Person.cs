@@ -19,6 +19,7 @@ namespace Phone_Selling_Project.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Date of Birth is required")]
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         [DisplayName("Date of Birth"), DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 

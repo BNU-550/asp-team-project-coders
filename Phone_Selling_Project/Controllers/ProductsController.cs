@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Phone_Selling_Project.Data;
 using Phone_Selling_Project.Models;
 
-namespace Phone_Selling_Project.Views
+namespace Phone_Selling_Project.Controllers
 {
     public class ProductsController : Controller
     {

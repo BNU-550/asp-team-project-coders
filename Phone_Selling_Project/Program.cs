@@ -1,13 +1,13 @@
+using Phone_Selling_Project.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Phone_Selling_Project.Data;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Phone_Selling_Project
 {
@@ -30,10 +30,7 @@ namespace Phone_Selling_Project
                 try
                 {
                     var context = services.GetRequiredService<ApplicationDbContext>();
-
-                    context.Database.EnsureCreated();
-
-                    DbInitailiser.Initialize(context);
+                    DbInitialiser.Initialize(context);
                 }
                 catch (Exception ex)
                 {
