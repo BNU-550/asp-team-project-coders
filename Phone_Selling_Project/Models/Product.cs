@@ -16,7 +16,7 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage = "Enter a product name"), StringLength(30)]
         public string ProductName { get; set; }
 
-        [Required(ErrorMessage = "Enter a product description"), StringLength(256)]
+        [Required(ErrorMessage = "Enter a product description"), StringLength(500)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

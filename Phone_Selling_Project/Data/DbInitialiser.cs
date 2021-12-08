@@ -16,7 +16,7 @@ namespace Phone_Selling_Project.Data
 
             AddProducts(context);
 
-            AddPerson(context);
+            //AddPerson(context);
 
 
         }
@@ -73,13 +73,18 @@ namespace Phone_Selling_Project.Data
 
             var people = new Person[]
             {
-                new Person {FirstName = "Louis",
+                new Person
+                {
+                    
+                    PaymentID = 1,
+                    AddressID = 1,
+                    FirstName = "Louis",
                     LastName = "Symons",
                     Email = "Louis_Test@gmail.com",
                     MobileNumber = "07852589964",
                     isStaff = true,
                     DateOfBirth=DateTime.Parse("1992/06/15")
-                    }
+                }
             };
 
             foreach (Person p in people)
