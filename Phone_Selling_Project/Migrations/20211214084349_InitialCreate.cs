@@ -81,7 +81,7 @@ namespace Phone_Selling_Project.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     StockLevel = table.Column<int>(type: "int", nullable: false),
                     MemoryStorage = table.Column<int>(type: "int", maxLength: 4, nullable: false),

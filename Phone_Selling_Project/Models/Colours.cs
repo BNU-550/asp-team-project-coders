@@ -7,6 +7,6 @@ namespace Phone_Selling_Project.Models
 {
     public enum Colours
     {
-        SpaceGrey, Black, Yellow
+        SpaceGrey, Gold, Silver, Blue, MidnightGreen, Graphite, SierraBlue, Starlight, Red, Pink, Purple, White
     }
 }

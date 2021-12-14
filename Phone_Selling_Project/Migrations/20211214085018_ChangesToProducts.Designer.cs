@@ -10,8 +10,8 @@ using Phone_Selling_Project.Data;
 namespace Phone_Selling_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211208093407_ChangedProductDescription")]
-    partial class ChangedProductDescription
+    [Migration("20211214085018_ChangesToProducts")]
+    partial class ChangesToProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -374,15 +374,16 @@ namespace Phone_Selling_Project.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("ImageFileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MemoryStorage")
+                    b.Property<string>("MemoryStorage")
+                        .IsRequired()
                         .HasMaxLength(4)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
@@ -392,11 +393,11 @@ namespace Phone_Selling_Project.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int>("Ram")
-                        .HasColumnType("int");
+                    b.Property<string>("Ram")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("ScreenSize")
-                        .HasMaxLength(3)
                         .HasColumnType("float");
 
                     b.Property<int>("StockLevel")

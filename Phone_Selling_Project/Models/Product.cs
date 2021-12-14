@@ -16,7 +16,7 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage = "Enter a product name"), StringLength(30)]
         public string ProductName { get; set; }
 
-        [Required(ErrorMessage = "Enter a product description"), StringLength(500)]
+        [Required(ErrorMessage = "Enter a product description"), StringLength(700)]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
@@ -30,12 +30,12 @@ namespace Phone_Selling_Project.Models
 
         [Range(128, 512)]
         [Required(ErrorMessage = "Enter a Storage Value in Gbs"), StringLength(4)]
-        public int MemoryStorage { get; set; }
+        public String MemoryStorage { get; set; }
 
         [Required(ErrorMessage = "Enter a Colour")]
         public Colours Colour { get; set; } = Colours.SpaceGrey;
 
-        [Required(ErrorMessage = "Enter a Screen Size in Inches"), StringLength(3)]
+        [Required(ErrorMessage = "Enter a Screen Size in Inches")]
         public double ScreenSize { get; set; }
 
         // How to store image on database? base64?
@@ -43,7 +43,7 @@ namespace Phone_Selling_Project.Models
         public string ImageFileName { get; set; }
 
         [Required(ErrorMessage ="Enter Ram size in Gbs"), Range(3, 16)]
-        public int Ram { get; set; }
+        public String Ram { get; set; }
 
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }

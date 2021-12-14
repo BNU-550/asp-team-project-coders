@@ -10,7 +10,7 @@ using Phone_Selling_Project.Data;
 namespace Phone_Selling_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211206030914_InitialCreate")]
+    [Migration("20211214084349_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -374,8 +374,8 @@ namespace Phone_Selling_Project.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasMaxLength(700)
+                        .HasColumnType("nvarchar(700)");
 
                     b.Property<string>("ImageFileName")
                         .HasColumnType("nvarchar(max)");
