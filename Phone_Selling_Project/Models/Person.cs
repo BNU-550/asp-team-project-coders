@@ -9,6 +9,8 @@ namespace Phone_Selling_Project.Models
         [Key]
         public int ID { get; set; }
 
+        //ToDo: Cant be seeded without create a address and payment before creating a customer, wrong way round? 
+        
         public int AddressID {get;set;}
         public int PaymentID { get; set; }
 

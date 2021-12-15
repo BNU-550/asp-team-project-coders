@@ -13,21 +13,21 @@ namespace Phone_Selling_Project.Models
         [Key]
         public int ID { get; set; }
 
-        [Required, DisplayName("Date")]
+        [Required, DisplayName("Expiry Month")]
         [Range(1,12)]
         public int ExpiryMonth { get; set; }
 
-        [Required, DisplayName("Date")]
+        [Required, DisplayName("Expiry Year")]
         [Range(2021, 2030)]
         public int ExpiryYear { get; set; }
 
         [Required, DisplayName("Card Number"), DataType(DataType.CreditCard)]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Not a valid Csc Code")]
-        private int CardNumber { get; set; }
+        public int CardNumber { get; set; }
 
-        [Required, DisplayName("Csc Code"), StringLength(3)]
+        [Required, DisplayName("Csc Code")]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "Not a valid Csc Code")]
-        protected int SecurityCode { get; set; }
+        public int SecurityCode { get; set; }
 
     }
 }

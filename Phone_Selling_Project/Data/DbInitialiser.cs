@@ -16,7 +16,9 @@ namespace Phone_Selling_Project.Data
 
             AddProducts(context);
 
-            //AddPerson(context);
+            AddPerson(context);
+
+            AddAddress(context);
 
 
         }
@@ -192,6 +194,56 @@ namespace Phone_Selling_Project.Data
             foreach (Person p in people)
             {
                 context.Persons.Add(p);
+            }
+            context.SaveChanges();
+        }
+
+        private static void AddAddress(ApplicationDbContext context)
+        {
+            if (context.Addresses.Any())
+            {
+                return;
+            }
+
+            var addresses = new Address[]
+            {
+                new Address
+                {
+                    HouseNameNumber = "19",
+                    PostCode = "TR151NA"
+                    
+                }
+            };
+
+            foreach (Address a in addresses)
+            {
+                context.Addresses.Add(a);
+            }
+            context.SaveChanges();
+        }
+
+        private static void AddPayment(ApplicationDbContext context)
+        {
+            if (context.Payments.Any())
+            {
+                return;
+            }
+
+            var payments = new Payment[]
+            {
+                new Payment
+                {
+                    ExpiryMonth = 08,
+                    ExpiryYear = 17,
+                    CardNumber = 123456789,
+                    SecurityCode = 123
+
+                }
+            };
+
+            foreach (Payment p in payments)
+            {
+                context.Payments.Add(p);
             }
             context.SaveChanges();
         }
