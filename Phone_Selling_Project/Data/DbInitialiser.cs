@@ -16,9 +16,12 @@ namespace Phone_Selling_Project.Data
 
             AddProducts(context);
 
+            AddAddress(context);
+
+            AddPayment(context);
+
             AddPerson(context);
 
-            AddAddress(context);
 
 
         }
@@ -179,7 +182,7 @@ namespace Phone_Selling_Project.Data
             {
                 new Person
                 {
-                    
+
                     PaymentID = 1,
                     AddressID = 1,
                     FirstName = "Louis",
@@ -188,8 +191,49 @@ namespace Phone_Selling_Project.Data
                     MobileNumber = "07852589964",
                     isStaff = true,
                     DateOfBirth=DateTime.Parse("1992/06/15")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 2,
+                    AddressID = 2,
+                    FirstName = "Joe",
+                    LastName = "Smith",
+                    Email = "Joe_Smith@gmail.com",
+                    MobileNumber = "07452589964",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1998/04/12")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 3,
+                    AddressID = 3,
+                    FirstName = "Sam",
+                    LastName = "Rickard",
+                    Email = "Sam_R@gmail.com",
+                    MobileNumber = "07454589964",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1996/08/12")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 4,
+                    AddressID = 4,
+                    FirstName = "Phi",
+                    LastName = "Brown",
+                    Email = "Phil_Brown@gmail.com",
+                    MobileNumber = "07452589964",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1988/04/12")
                 }
             };
+
+            
 
             foreach (Person p in people)
             {
@@ -212,6 +256,27 @@ namespace Phone_Selling_Project.Data
                     HouseNameNumber = "19",
                     PostCode = "TR151NA"
                     
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "25",
+                    PostCode = "TR13PD"
+
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "89",
+                    PostCode = "TR182BN"
+
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "50",
+                    PostCode = "TR32NA"
+
                 }
             };
 
@@ -231,6 +296,33 @@ namespace Phone_Selling_Project.Data
 
             var payments = new Payment[]
             {
+                new Payment
+                {
+                    ExpiryMonth = 08,
+                    ExpiryYear = 17,
+                    CardNumber = 123456789,
+                    SecurityCode = 123
+
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 06,
+                    ExpiryYear = 19,
+                    CardNumber = 123456755,
+                    SecurityCode = 456
+
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 10,
+                    ExpiryYear = 23,
+                    CardNumber = 123456856,
+                    SecurityCode = 789
+
+                },
+
                 new Payment
                 {
                     ExpiryMonth = 08,

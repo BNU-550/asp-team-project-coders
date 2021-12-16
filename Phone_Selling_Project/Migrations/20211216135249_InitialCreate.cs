@@ -67,7 +67,9 @@ namespace Phone_Selling_Project.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExpiryMonth = table.Column<int>(type: "int", nullable: false),
-                    ExpiryYear = table.Column<int>(type: "int", nullable: false)
+                    ExpiryYear = table.Column<int>(type: "int", nullable: false),
+                    CardNumber = table.Column<int>(type: "int", nullable: false),
+                    SecurityCode = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -84,11 +86,11 @@ namespace Phone_Selling_Project.Migrations
                     Description = table.Column<string>(type: "nvarchar(700)", maxLength: 700, nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     StockLevel = table.Column<int>(type: "int", nullable: false),
-                    MemoryStorage = table.Column<int>(type: "int", maxLength: 4, nullable: false),
+                    MemoryStorage = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
                     Colour = table.Column<int>(type: "int", nullable: false),
-                    ScreenSize = table.Column<double>(type: "float", maxLength: 3, nullable: false),
+                    ScreenSize = table.Column<double>(type: "float", nullable: false),
                     ImageFileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Ram = table.Column<int>(type: "int", nullable: false)
+                    Ram = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

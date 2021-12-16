@@ -10,8 +10,8 @@ using Phone_Selling_Project.Data;
 namespace Phone_Selling_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211215025628_StartAddingPeople")]
-    partial class StartAddingPeople
+    [Migration("20211216135249_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -304,10 +304,16 @@ namespace Phone_Selling_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CardNumber")
+                        .HasColumnType("int");
+
                     b.Property<int>("ExpiryMonth")
                         .HasColumnType("int");
 
                     b.Property<int>("ExpiryYear")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SecurityCode")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
