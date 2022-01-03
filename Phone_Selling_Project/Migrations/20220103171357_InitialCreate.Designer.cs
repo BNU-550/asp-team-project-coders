@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Phone_Selling_Project.Data;
 
 namespace Phone_Selling_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220103171357_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,10 +334,6 @@ namespace Phone_Selling_Project.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -368,8 +366,6 @@ namespace Phone_Selling_Project.Migrations
                     b.HasIndex("PaymentID");
 
                     b.ToTable("Persons");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Person");
                 });
 
             modelBuilder.Entity("Phone_Selling_Project.Models.Product", b =>
@@ -443,18 +439,6 @@ namespace Phone_Selling_Project.Migrations
                     b.HasIndex("ProductID");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("Phone_Selling_Project.Models.Staff", b =>
-                {
-                    b.HasBaseType("Phone_Selling_Project.Models.Person");
-
-                    b.Property<string>("StaffRole")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.HasDiscriminator().HasValue("Staff");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
