@@ -258,6 +258,33 @@ namespace Phone_Selling_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    PersonID = table.Column<int>(type: "int", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Persons_PersonID",
+                        column: x => x.PersonID,
+                        principalTable: "Persons",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderProducts",
                 columns: table => new
                 {
@@ -348,6 +375,16 @@ namespace Phone_Selling_Project.Migrations
                 name: "IX_Persons_PaymentID",
                 table: "Persons",
                 column: "PaymentID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_PersonID",
+                table: "Reviews",
+                column: "PersonID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_ProductID",
+                table: "Reviews",
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -369,6 +406,9 @@ namespace Phone_Selling_Project.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderProducts");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

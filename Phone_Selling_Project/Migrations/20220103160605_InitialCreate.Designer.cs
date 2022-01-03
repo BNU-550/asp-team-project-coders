@@ -10,8 +10,8 @@ using Phone_Selling_Project.Data;
 namespace Phone_Selling_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211216140308_ChangeAddressDetails")]
-    partial class ChangeAddressDetails
+    [Migration("20220103160605_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -414,6 +414,33 @@ namespace Phone_Selling_Project.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Phone_Selling_Project.Models.Review", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PersonID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PersonID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -508,6 +535,25 @@ namespace Phone_Selling_Project.Migrations
                     b.Navigation("Address");
 
                     b.Navigation("Payment");
+                });
+
+            modelBuilder.Entity("Phone_Selling_Project.Models.Review", b =>
+                {
+                    b.HasOne("Phone_Selling_Project.Models.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Phone_Selling_Project.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Phone_Selling_Project.Models.Order", b =>

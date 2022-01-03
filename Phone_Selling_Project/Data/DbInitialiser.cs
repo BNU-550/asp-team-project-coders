@@ -22,10 +22,99 @@ namespace Phone_Selling_Project.Data
 
             AddPerson(context);
 
+            AddReview(context);
+
 
 
         }
-       
+
+        private static void AddReview(ApplicationDbContext context)
+        {
+            if (context.Reviews.Any())
+            {
+                return;
+            }
+
+            var reviews = new Review[]
+            {
+                new Review
+                {
+                     ProductID=1,
+                     PersonID=1,  
+                     Text="Excellent"
+                },
+
+                new Review
+                {
+                    ProductID=2,
+                    PersonID=2,
+                    Text="Speedy Service"
+                },
+
+                new Review
+                {
+                    ProductID=3,
+                    PersonID=3,
+                    Text="Good selection of products"
+                },
+
+                new Review
+                {
+                    ProductID=4,
+                    PersonID=4,
+                    Text="Arrvied in good time"
+                },
+
+                new Review
+                {
+                    ProductID=5,
+                    PersonID=5,
+                    Text="Good customer service"
+                },
+
+                new Review
+                {
+                    ProductID=6,
+                    PersonID=6,
+                    Text="Fast delivery"
+                },
+
+                new Review
+                {
+                    ProductID=7,
+                    PersonID=7,
+                    Text="Good value for money"
+                },
+
+                new Review
+                {
+                    ProductID=8,
+                    PersonID=8,
+                    Text="Good service"
+                },
+
+                new Review
+                {
+                    ProductID=9,
+                    PersonID=9,
+                    Text="Arrived as expected"
+                },
+
+                new Review
+                {
+                    ProductID=10,
+                    PersonID=10,
+                    Text="Great service"
+                },
+            };
+
+            foreach (Review r in reviews)
+            {
+                context.Reviews.Add(r);
+            }
+            context.SaveChanges();
+        }
+
         private static void AddProducts(ApplicationDbContext context)
         {
             if (context.Products.Any())
@@ -230,7 +319,85 @@ namespace Phone_Selling_Project.Data
                     MobileNumber = "07452589964",
                     isStaff = false,
                     DateOfBirth=DateTime.Parse("1988/04/12")
-                }
+                },
+
+                new Person
+                {
+
+                    PaymentID = 5,
+                    AddressID = 5,
+                    FirstName = "Max",
+                    LastName = "Tester",
+                    Email = "Max_Tester@gmail.com",
+                    MobileNumber = "07852589955",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1992/06/18")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 6,
+                    AddressID = 6,
+                    FirstName = "Timmy",
+                    LastName = "Russell",
+                    Email = "Timmy@gmail.com",
+                    MobileNumber = "07852589486",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1997/06/15")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 7,
+                    AddressID = 7,
+                    FirstName = "Karl",
+                    LastName = "Matthews",
+                    Email = "Karl@gmail.com",
+                    MobileNumber = "07812389964",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1985/08/15")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 8,
+                    AddressID = 8,
+                    FirstName = "Mike",
+                    LastName = "Peevor",
+                    Email = "Mike@gmail.com",
+                    MobileNumber = "07485589964",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1952/06/15")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 9,
+                    AddressID = 9,
+                    FirstName = "James",
+                    LastName = "Arns",
+                    Email = "James@gmail.com",
+                    MobileNumber = "07785589964",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1982/09/15")
+                },
+
+                new Person
+                {
+
+                    PaymentID = 10,
+                    AddressID = 10,
+                    FirstName = "Jay",
+                    LastName = "Crock",
+                    Email = "Jaycc@gmail.com",
+                    MobileNumber = "07852145964",
+                    isStaff = false,
+                    DateOfBirth=DateTime.Parse("1998/04/18")
+                },
             };
 
             
@@ -277,7 +444,49 @@ namespace Phone_Selling_Project.Data
                     HouseNameNumber = "50",
                     PostCode = "TR32NA"
 
-                }
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "58",
+                    PostCode = "TR32NA"
+
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "74",
+                    PostCode = "TR32NA"
+
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "69",
+                    PostCode = "TR1449TG"
+
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "19",
+                    PostCode = "TR32NA"
+
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "70",
+                    PostCode = "TR164BQ"
+
+                },
+
+                new Address
+                {
+                    HouseNameNumber = "85",
+                    PostCode = "TR164BQ"
+
+                },
             };
 
             foreach (Address a in addresses)
@@ -326,11 +535,65 @@ namespace Phone_Selling_Project.Data
                 new Payment
                 {
                     ExpiryMonth = 08,
-                    ExpiryYear = 17,
+                    ExpiryYear = 25,
                     CardNumber = 123456789,
                     SecurityCode = 123
 
-                }
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 09,
+                    ExpiryYear = 24,
+                    CardNumber = 123455689,
+                    SecurityCode = 485
+
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 07,
+                    ExpiryYear = 24,
+                    CardNumber = 123456825,
+                    SecurityCode = 485
+
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 02,
+                    ExpiryYear = 22,
+                    CardNumber = 123456145,
+                    SecurityCode = 654
+
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 05,
+                    ExpiryYear = 23,
+                    CardNumber = 123456652,
+                    SecurityCode = 325
+
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 09,
+                    ExpiryYear = 24,
+                    CardNumber = 123456485,
+                    SecurityCode = 524
+
+                },
+
+                new Payment
+                {
+                    ExpiryMonth = 02,
+                    ExpiryYear = 22,
+                    CardNumber = 12345648,
+                    SecurityCode = 325
+
+                },
             };
 
             foreach (Payment p in payments)

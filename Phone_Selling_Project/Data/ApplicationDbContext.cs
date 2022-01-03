@@ -16,6 +16,7 @@ namespace Phone_Selling_Project.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<OrderProduct> OrderProducts {get; set;}
         public DbSet<Product> Products { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
     }
 }
