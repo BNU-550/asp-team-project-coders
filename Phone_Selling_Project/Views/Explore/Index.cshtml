@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Phone_Selling_Project.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{ 
+    int colNo = 0;
+}
+
+<header class="jumbotron">
+    <h1>iPhone Listings</h1>
+</header>
+
+<section>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            if (colNo > 0 && colNo % 3 == 0)
+            {
+            @:</div><div class="row">
+            }
+
+            <div class="col-lg-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="/images/@product.ImageFileName" 
+                         class="card-img-top" alt="bluemax" width="200"/>
+                    <div class="card-body">
+                        <h5 class="card-title" justify-content-sm-center >@product.ProductName</h5>
+                        <p class="card-text">@product.Price.ToString("£00.00")</p>
+                        <a href="#" class="btn btn-primary">View iPhone</a>
+                    </div>
+                </div>
+            </div>
+            colNo++;
+        }
+    </div>
+</section>
+
+
+

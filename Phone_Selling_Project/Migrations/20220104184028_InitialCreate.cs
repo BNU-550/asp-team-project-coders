@@ -216,7 +216,9 @@ namespace Phone_Selling_Project.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    isStaff = table.Column<bool>(type: "bit", nullable: false)
+                    isStaff = table.Column<bool>(type: "bit", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StaffRole = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true)
                 },
                 constraints: table =>
                 {

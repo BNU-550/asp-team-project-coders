@@ -10,23 +10,22 @@ using Phone_Selling_Project.Models;
 
 namespace Phone_Selling_Project.Controllers
 {
-    public class StaffsController : Controller
+    public class ExploreController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public StaffsController(ApplicationDbContext context)
+        public ExploreController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Staffs
+        // GET: Explore
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Staffs.Include(s => s.Address).Include(s => s.Payment);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Products.ToListAsync());
         }
 
-        // GET: Staffs/Details/5
+        // GET: Explore/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +33,39 @@ namespace Phone_Selling_Project.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staffs
-                .Include(s => s.Address)
-                .Include(s => s.Payment)
+            var product = await _context.Products
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (staff == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(product);
         }
 
-        // GET: Staffs/Create
+        // GET: Explore/Create
         public IActionResult Create()
         {
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber");
-            ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID");
             return View();
         }
 
-        // POST: Staffs/Create
+        // POST: Explore/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("StaffRole,ID,AddressID,PaymentID,FirstName,LastName,DateOfBirth,Email,MobileNumber,isStaff")] Staff staff)
+        public async Task<IActionResult> Create([Bind("ID,ProductName,Description,Price,StockLevel,MemoryStorage,Colour,ScreenSize,ImageFileName,Ram")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(staff);
+                _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber", staff.AddressID);
-            ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID", staff.PaymentID);
-            return View(staff);
+            return View(product);
         }
 
-        // GET: Staffs/Edit/5
+        // GET: Explore/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +73,22 @@ namespace Phone_Selling_Project.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staffs.FindAsync(id);
-            if (staff == null)
+            var product = await _context.Products.FindAsync(id);
+            if (product == null)
             {
                 return NotFound();
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber", staff.AddressID);
-            ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID", staff.PaymentID);
-            return View(staff);
+            return View(product);
         }
 
-        // POST: Staffs/Edit/5
+        // POST: Explore/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StaffRole,ID,AddressID,PaymentID,FirstName,LastName,DateOfBirth,Email,MobileNumber,isStaff")] Staff staff)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ProductName,Description,Price,StockLevel,MemoryStorage,Colour,ScreenSize,ImageFileName,Ram")] Product product)
         {
-            if (id != staff.ID)
+            if (id != product.ID)
             {
                 return NotFound();
             }
@@ -106,12 +97,12 @@ namespace Phone_Selling_Project.Controllers
             {
                 try
                 {
-                    _context.Update(staff);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StaffExists(staff.ID))
+                    if (!ProductExists(product.ID))
                     {
                         return NotFound();
                     }
@@ -122,12 +113,10 @@ namespace Phone_Selling_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber", staff.AddressID);
-            ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID", staff.PaymentID);
-            return View(staff);
+            return View(product);
         }
 
-        // GET: Staffs/Delete/5
+        // GET: Explore/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +124,30 @@ namespace Phone_Selling_Project.Controllers
                 return NotFound();
             }
 
-            var staff = await _context.Staffs
-                .Include(s => s.Address)
-                .Include(s => s.Payment)
+            var product = await _context.Products
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (staff == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(staff);
+            return View(product);
         }
 
-        // POST: Staffs/Delete/5
+        // POST: Explore/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var staff = await _context.Staffs.FindAsync(id);
-            _context.Staffs.Remove(staff);
+            var product = await _context.Products.FindAsync(id);
+            _context.Products.Remove(product);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StaffExists(int id)
+        private bool ProductExists(int id)
         {
-            return _context.Staffs.Any(e => e.ID == id);
+            return _context.Products.Any(e => e.ID == id);
         }
     }
 }

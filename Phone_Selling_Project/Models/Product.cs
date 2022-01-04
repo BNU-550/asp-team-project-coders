@@ -38,8 +38,6 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage = "Enter a Screen Size in Inches")]
         public double ScreenSize { get; set; }
 
-        // How to store image on database? base64?
-        // Limited scope for uploading images due to solo? 
         public string ImageFileName { get; set; }
 
         [Required(ErrorMessage ="Enter Ram size in Gbs"), Range(3, 16)]

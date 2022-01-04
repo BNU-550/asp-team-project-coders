@@ -24,8 +24,42 @@ namespace Phone_Selling_Project.Data
 
             AddReview(context);
 
+            AddStaff(context);
 
 
+
+        }
+
+        private static void AddStaff(ApplicationDbContext context)
+        {
+            if (context.Staffs.Any())
+            {
+                return;
+            }
+
+            var staffs = new Staff[]
+            {
+                new Staff
+                {
+                    
+                    StaffRole = "Manager",
+                    PaymentID = 1,
+                    AddressID = 1,
+                    FirstName = "Louis",
+                    LastName = "Symons",
+                    Email = "Louis_Test@gmail.com",
+                    MobileNumber = "07852589964",
+                    isStaff = true,
+                    DateOfBirth=DateTime.Parse("1992/06/15")
+               
+                }
+            };
+
+            foreach (Staff s in staffs)
+            {
+                context.Staffs.Add(s);
+            }
+            context.SaveChanges();
         }
 
         private static void AddReview(ApplicationDbContext context)
@@ -134,7 +168,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage= "512",
                              Colour=Colours.SpaceGrey,
                              ScreenSize=5.8,
-                             Ram= "4"
+                             Ram= "4",
+                             ImageFileName = "iPhone11ProGrey.jpg",
                                 },
                 new Product{
                              ProductName = "iPhone 11 Pro",
@@ -147,7 +182,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "512",
                              Colour = Colours.Gold,
                              ScreenSize = 5.8,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone11ProGold.jpg",
                             },
 
                 new Product{
@@ -159,7 +195,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "512",
                              Colour = Colours.Blue,
                              ScreenSize = 6.7,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone12ProMaxBlue.jpg"
                             },
 
                 new Product{
@@ -172,7 +209,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "256",
                              Colour = Colours.Gold,
                              ScreenSize = 6.7,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone13ProGold.jpg"
                             },
 
                 new Product{
@@ -185,7 +223,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "256",
                              Colour = Colours.Starlight,
                              ScreenSize = 6.1,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone13Starlight.jpg"
                             },
 
                 new Product{
@@ -198,7 +237,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "256",
                              Colour = Colours.Red,
                              ScreenSize = 6.1,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone13Red.jpg"
                             },
 
                 new Product{
@@ -210,7 +250,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "256",
                              Colour = Colours.White,
                              ScreenSize = 6.1,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone12White.jpg"
                             },
 
                 new Product{
@@ -223,7 +264,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "256",
                              Colour = Colours.Purple,
                              ScreenSize = 6.1,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone11Purple.jpg"
                             },
 
                 new Product{
@@ -236,7 +278,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "256",
                              Colour = Colours.Blue,
                              ScreenSize = 6.1,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone13MiniBlue.jpg"
                             },
 
                 new Product{
@@ -249,7 +292,8 @@ namespace Phone_Selling_Project.Data
                              MemoryStorage = "256",
                              Colour = Colours.MidnightGreen,
                              ScreenSize = 5.8,
-                             Ram = "4"
+                             Ram = "4",
+                             ImageFileName = "iPhone11ProMidnightgreen.jpg"
                             },
             };
                
@@ -269,18 +313,6 @@ namespace Phone_Selling_Project.Data
 
             var people = new Person[]
             {
-                new Person
-                {
-
-                    PaymentID = 1,
-                    AddressID = 1,
-                    FirstName = "Louis",
-                    LastName = "Symons",
-                    Email = "Louis_Test@gmail.com",
-                    MobileNumber = "07852589964",
-                    isStaff = true,
-                    DateOfBirth=DateTime.Parse("1992/06/15")
-                },
 
                 new Person
                 {
