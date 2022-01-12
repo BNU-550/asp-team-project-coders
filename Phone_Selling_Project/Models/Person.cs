@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace Phone_Selling_Project.Models
 {
@@ -29,6 +30,11 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage = "The email address is required")]
         //[EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+
+        public static explicit operator Person(Task<Person> v)
+        {
+            throw new NotImplementedException();
+        }
 
         [Required(ErrorMessage = "You must provide a phone number")]
         [Display(Name = "Mobile Number")]

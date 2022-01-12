@@ -37,6 +37,7 @@ namespace Phone_Selling_Project.Controllers
                 .Include(p => p.Address)
                 .Include(p => p.Payment)
                 .FirstOrDefaultAsync(m => m.ID == id);
+
             if (person == null)
             {
                 return NotFound();
@@ -50,6 +51,7 @@ namespace Phone_Selling_Project.Controllers
         {
             ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber");
             ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID");
+            
             return View();
         }
 
@@ -66,8 +68,10 @@ namespace Phone_Selling_Project.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            
             ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber", person.AddressID);
             ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID", person.PaymentID);
+            
             return View(person);
         }
 
@@ -80,12 +84,15 @@ namespace Phone_Selling_Project.Controllers
             }
 
             var person = await _context.Persons.FindAsync(id);
+            
             if (person == null)
             {
                 return NotFound();
             }
+            
             ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber", person.AddressID);
             ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID", person.PaymentID);
+            
             return View(person);
         }
 
@@ -121,8 +128,10 @@ namespace Phone_Selling_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            
             ViewData["AddressID"] = new SelectList(_context.Addresses, "ID", "HouseNameNumber", person.AddressID);
             ViewData["PaymentID"] = new SelectList(_context.Payments, "ID", "ID", person.PaymentID);
+            
             return View(person);
         }
 
@@ -138,6 +147,7 @@ namespace Phone_Selling_Project.Controllers
                 .Include(p => p.Address)
                 .Include(p => p.Payment)
                 .FirstOrDefaultAsync(m => m.ID == id);
+            
             if (person == null)
             {
                 return NotFound();
@@ -154,6 +164,7 @@ namespace Phone_Selling_Project.Controllers
             var person = await _context.Persons.FindAsync(id);
             _context.Persons.Remove(person);
             await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 

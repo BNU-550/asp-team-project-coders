@@ -26,7 +26,7 @@ namespace Phone_Selling_Project.Controllers
             return View();
         }
 
-        public async Task <IActionResult> MyAccount()
+        public async Task<IActionResult> MyAccount()
         {
             string email = User.Identity.Name;
             
@@ -34,12 +34,18 @@ namespace Phone_Selling_Project.Controllers
                 .Include(p => p.Address)
                 .Include(p => p.Payment)
                 .FirstOrDefaultAsync(m => m.Email == email);
+
             if (person == null)
             {
                 return NotFound();
             }
 
             return View(person);
+        }
+
+        public IActionResult HomeView()
+        {
+            return View();
         }
 
         public IActionResult Privacy()
