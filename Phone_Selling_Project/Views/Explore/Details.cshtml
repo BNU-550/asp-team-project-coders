@@ -4,10 +4,21 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<header class="jumbotron-fluid">
+    <h1>@Model.ProductName</h1>
+</header>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <div class="col-md-6 p-lg-6 mx-auto my-6">
+        <img src="/images/@Model.ImageFileName" />
+        <p class="lead fw-normal">@Model.Description</p>
+        <a class="btn btn-outline-secondary" href="#">Buy Now</a>
+    </div>
+    <div class="product-device shadow-sm d-none d-md-block"></div>
+    <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+</div>
 
 <div>
-    <h4>Product</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -28,9 +39,6 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StockLevel)
-        </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.StockLevel)
         </dd>
@@ -67,6 +75,5 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

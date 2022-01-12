@@ -21,7 +21,7 @@ namespace Phone_Selling_Project.Controllers
         }
 
         // GET: Products
-        [Authorize(Roles = "Staff")]
+        //[Authorize(Roles = "Staff")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Products.ToListAsync());
@@ -45,7 +45,7 @@ namespace Phone_Selling_Project.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Staff")]
+        //[Authorize(Roles = "Staff")]
         // GET: Products/Create
         public IActionResult Create()
         {
@@ -68,7 +68,7 @@ namespace Phone_Selling_Project.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Staff")]
+        //[Authorize(Roles = "Staff")]
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -85,7 +85,7 @@ namespace Phone_Selling_Project.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Staff")]
+        //[Authorize(Roles = "Staff")]
         // POST: Products/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -123,7 +123,7 @@ namespace Phone_Selling_Project.Controllers
 
 
         // GET: Products/Delete/5
-        [Authorize(Roles = "Staff")]
+        //[Authorize(Roles = "Staff")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,7 +142,7 @@ namespace Phone_Selling_Project.Controllers
         }
 
         // POST: Products/Delete/5
-        [Authorize(Roles = "Staff")]
+        //[Authorize(Roles = "Staff")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
