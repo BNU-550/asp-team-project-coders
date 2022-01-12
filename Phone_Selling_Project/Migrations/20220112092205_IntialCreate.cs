@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Phone_Selling_Project.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class IntialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,25 +238,25 @@ namespace Phone_Selling_Project.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    PersonID = table.Column<int>(type: "int", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateOrdered = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateDelivered = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerID = table.Column<int>(type: "int", nullable: true)
+                    DateDelivered = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.ID);
+                    table.PrimaryKey("PK_Orders", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Order_Persons_CustomerID",
-                        column: x => x.CustomerID,
+                        name: "FK_Orders_Persons_PersonID",
+                        column: x => x.PersonID,
                         principalTable: "Persons",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -290,22 +290,22 @@ namespace Phone_Selling_Project.Migrations
                 name: "OrderProducts",
                 columns: table => new
                 {
-                    OrderID = table.Column<int>(type: "int", nullable: false)
+                    OrderProductID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderID = table.Column<int>(type: "int", nullable: false),
                     ProductID = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "money", nullable: false),
-                    Quantity = table.Column<int>(type: "int", maxLength: 2, nullable: false),
-                    OrderID1 = table.Column<int>(type: "int", nullable: true)
+                    Quantity = table.Column<int>(type: "int", maxLength: 2, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderProducts", x => x.OrderID);
+                    table.PrimaryKey("PK_OrderProducts", x => x.OrderProductID);
                     table.ForeignKey(
-                        name: "FK_OrderProducts_Order_OrderID1",
-                        column: x => x.OrderID1,
-                        principalTable: "Order",
+                        name: "FK_OrderProducts_Orders_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Orders",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_OrderProducts_Products_ProductID",
                         column: x => x.ProductID,
@@ -354,19 +354,19 @@ namespace Phone_Selling_Project.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_CustomerID",
-                table: "Order",
-                column: "CustomerID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderProducts_OrderID1",
+                name: "IX_OrderProducts_OrderID",
                 table: "OrderProducts",
-                column: "OrderID1");
+                column: "OrderID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderProducts_ProductID",
                 table: "OrderProducts",
                 column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_PersonID",
+                table: "Orders",
+                column: "PersonID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Persons_AddressID",
@@ -419,7 +419,7 @@ namespace Phone_Selling_Project.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Products");

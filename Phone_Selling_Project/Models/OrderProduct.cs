@@ -10,10 +10,11 @@ namespace Phone_Selling_Project.Models
 {
     public class OrderProduct
     {
-        [ForeignKey("ID"), Key]
+
+        public int OrderProductID { get; set; }
+
         public int OrderID { get; set; }
 
-        [ForeignKey("ID")]
         public int ProductID { get; set; }
 
         [Range(0, 2000), DataType(DataType.Currency)]

@@ -11,7 +11,7 @@ namespace Phone_Selling_Project.Models
 
         //ToDo: Cant be seeded without create a address and payment before creating a customer, wrong way round? 
         
-        public int AddressID {get;set;}
+        public int AddressID { get; set;}
         public int PaymentID { get; set; }
 
         [Required (ErrorMessage = "The First name address is required"), StringLength(20)]

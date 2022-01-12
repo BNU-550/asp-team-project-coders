@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,23 +10,23 @@ using Phone_Selling_Project.Models;
 
 namespace Phone_Selling_Project.Controllers
 {
-    public class ProductsController : Controller
+    public class ReviewsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductsController(ApplicationDbContext context)
+        public ReviewsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Products
-        [Authorize(Roles = "Staff")]
+        // GET: Reviews
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            var applicationDbContext = _context.Reviews.Include(r => r.Person).Include(r => r.Product);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Products/Details/5
+        // GET: Reviews/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,41 +34,45 @@ namespace Phone_Selling_Project.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
+            var review = await _context.Reviews
+                .Include(r => r.Person)
+                .Include(r => r.Product)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (product == null)
+            if (review == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(review);
         }
 
-        [Authorize(Roles = "Staff")]
-        // GET: Products/Create
+        // GET: Reviews/Create
         public IActionResult Create()
         {
+            ViewData["PersonID"] = new SelectList(_context.Persons, "ID", "Discriminator");
+            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "Description");
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Reviews/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,ProductName,Description,Price,StockLevel,MemoryStorage,Colour,ScreenSize,ImageFileName,Ram")] Product product)
+        public async Task<IActionResult> Create([Bind("ID,ProductID,PersonID,Text")] Review review)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                _context.Add(review);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            ViewData["PersonID"] = new SelectList(_context.Persons, "ID", "Discriminator", review.PersonID);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "Description", review.ProductID);
+            return View(review);
         }
 
-        [Authorize(Roles = "Staff")]
-        // GET: Products/Edit/5
+        // GET: Reviews/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +80,24 @@ namespace Phone_Selling_Project.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            var review = await _context.Reviews.FindAsync(id);
+            if (review == null)
             {
                 return NotFound();
             }
-            return View(product);
+            ViewData["PersonID"] = new SelectList(_context.Persons, "ID", "Discriminator", review.PersonID);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "Description", review.ProductID);
+            return View(review);
         }
 
-        [Authorize(Roles = "Staff")]
-        // POST: Products/Edit/5
+        // POST: Reviews/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,ProductName,Description,Price,StockLevel,MemoryStorage,Colour,ScreenSize,ImageFileName,Ram")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ProductID,PersonID,Text")] Review review)
         {
-            if (id != product.ID)
+            if (id != review.ID)
             {
                 return NotFound();
             }
@@ -102,12 +106,12 @@ namespace Phone_Selling_Project.Controllers
             {
                 try
                 {
-                    _context.Update(product);
+                    _context.Update(review);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.ID))
+                    if (!ReviewExists(review.ID))
                     {
                         return NotFound();
                     }
@@ -118,12 +122,12 @@ namespace Phone_Selling_Project.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            ViewData["PersonID"] = new SelectList(_context.Persons, "ID", "Discriminator", review.PersonID);
+            ViewData["ProductID"] = new SelectList(_context.Products, "ID", "Description", review.ProductID);
+            return View(review);
         }
 
-
-        // GET: Products/Delete/5
-        [Authorize(Roles = "Staff")]
+        // GET: Reviews/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,31 +135,32 @@ namespace Phone_Selling_Project.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
+            var review = await _context.Reviews
+                .Include(r => r.Person)
+                .Include(r => r.Product)
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (product == null)
+            if (review == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(review);
         }
 
-        // POST: Products/Delete/5
-        [Authorize(Roles = "Staff")]
+        // POST: Reviews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product);
+            var review = await _context.Reviews.FindAsync(id);
+            _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        private bool ReviewExists(int id)
         {
-            return _context.Products.Any(e => e.ID == id);
+            return _context.Reviews.Any(e => e.ID == id);
         }
     }
 }

@@ -13,6 +13,8 @@ namespace Phone_Selling_Project.Models
         [Key]
         public int ID { get; set; }
 
+        public int PersonID { get; set; }
+
         [Required]
         [DisplayName("Date"), DataType(DataType.Date)]
         public DateTime Date { get; set; }
@@ -27,7 +29,7 @@ namespace Phone_Selling_Project.Models
 
         // Navigation Property
 
-        public Person Customer { get; set; }
+        public virtual Person Person { get; set; }
 
         public virtual ICollection<OrderProduct> OrderProducts {get; set;}
     }

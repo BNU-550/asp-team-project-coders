@@ -26,8 +26,58 @@ namespace Phone_Selling_Project.Data
 
             AddStaff(context);
 
+            AddOrder(context);
+
+            AddOrderProduct(context);
 
 
+
+        }
+
+        private static void AddOrderProduct(ApplicationDbContext context)
+        {
+            if(context.OrderProducts.Any())
+            {
+                return;
+            }
+
+            var orderProducts = new OrderProduct[]
+                { 
+                    new OrderProduct
+                    {
+                        OrderProductID = 1,
+                        OrderID = 1,
+                        ProductID = 1, 
+                        UnitPrice = 1200,
+                        Quantity = 1,
+                    }
+                };
+
+            foreach (OrderProduct o in orderProducts)
+            {
+                context.OrderProducts.Add(o);
+            }
+            context.SaveChanges();
+        }
+
+        private static void AddOrder(ApplicationDbContext context)
+        {
+            if(context.Orders.Any())
+            {
+                return;
+            }
+
+            var orders = new Order[]
+            {
+                new Order
+                {
+                    ID = 1,
+                    Date =DateTime.Parse ("12/05/2022"),
+                    DateOrdered=DateTime.Parse("11/05/2022"),
+                    DateDelivered=DateTime.Parse("15/05/2022"),
+                    PersonID = 1,
+                }
+            };
         }
 
         private static void AddStaff(ApplicationDbContext context)
@@ -134,12 +184,6 @@ namespace Phone_Selling_Project.Data
                     Text="Arrived as expected"
                 },
 
-                new Review
-                {
-                    ProductID=10,
-                    PersonID=10,
-                    Text="Great service"
-                },
             };
 
             foreach (Review r in reviews)
@@ -371,7 +415,7 @@ namespace Phone_Selling_Project.Data
 
                     PaymentID = 6,
                     AddressID = 6,
-                    FirstName = "Timmy",
+                    FirstName = "Tim",
                     LastName = "Russell",
                     Email = "Timmy@gmail.com",
                     MobileNumber = "07852589486",

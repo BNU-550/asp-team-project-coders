@@ -10,8 +10,8 @@ using Phone_Selling_Project.Data;
 namespace Phone_Selling_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220104184028_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220112092205_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -249,9 +249,6 @@ namespace Phone_Selling_Project.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CustomerID")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -261,21 +258,24 @@ namespace Phone_Selling_Project.Migrations
                     b.Property<DateTime>("DateOrdered")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("PersonID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerID");
+                    b.HasIndex("PersonID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Phone_Selling_Project.Models.OrderProduct", b =>
                 {
-                    b.Property<int>("OrderID")
+                    b.Property<int>("OrderProductID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("OrderID1")
+                    b.Property<int>("OrderID")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductID")
@@ -288,9 +288,9 @@ namespace Phone_Selling_Project.Migrations
                     b.Property<decimal>("UnitPrice")
                         .HasColumnType("money");
 
-                    b.HasKey("OrderID");
+                    b.HasKey("OrderProductID");
 
-                    b.HasIndex("OrderID1");
+                    b.HasIndex("OrderID");
 
                     b.HasIndex("ProductID");
 
@@ -512,18 +512,22 @@ namespace Phone_Selling_Project.Migrations
 
             modelBuilder.Entity("Phone_Selling_Project.Models.Order", b =>
                 {
-                    b.HasOne("Phone_Selling_Project.Models.Person", "Customer")
+                    b.HasOne("Phone_Selling_Project.Models.Person", "Person")
                         .WithMany()
-                        .HasForeignKey("CustomerID");
+                        .HasForeignKey("PersonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Phone_Selling_Project.Models.OrderProduct", b =>
                 {
                     b.HasOne("Phone_Selling_Project.Models.Order", "Order")
                         .WithMany("OrderProducts")
-                        .HasForeignKey("OrderID1");
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Phone_Selling_Project.Models.Product", "Product")
                         .WithMany("OrderProducts")
