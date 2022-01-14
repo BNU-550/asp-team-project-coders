@@ -12,6 +12,7 @@
     <div class="col-md-6 p-lg-6 mx-auto my-6">
         <img src="/images/@Model.ImageFileName" />
         <p class="lead fw-normal">@Model.Description</p>
+        <p>Price @Model.Price.ToString("£00.00")</p>
         <a class="btn btn-outline-secondary" href="#">Buy Now</a>
     </div>
     <div class="product-device shadow-sm d-none d-md-block"></div>
@@ -20,7 +21,7 @@
 
 <div>
     <hr />
-    <dl class="row">
+    <dl class="d-table-row bg-light" style="font-family: Arial, Helvetica, sans-serif">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ProductName)
         </dt>
@@ -32,12 +33,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price)
         </dd>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.StockLevel)
@@ -75,5 +70,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-secondary" asp-action="Index">Back to Phones</a>
 </div>
+<hr />

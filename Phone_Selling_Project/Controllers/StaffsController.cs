@@ -21,7 +21,7 @@ namespace Phone_Selling_Project.Controllers
         }
 
         // GET: Staffs
-        [Authorize(Roles ="Staff")]
+       // [Authorize(Roles ="Staff")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Staffs.Include(s => s.Address).Include(s => s.Payment);

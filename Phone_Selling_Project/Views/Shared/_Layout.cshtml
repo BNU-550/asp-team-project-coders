@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index">Phones</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Simply iPhone's'</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,19 +22,17 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">View Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Explore" asp-action="Index">Browse</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Explore" asp-action="Index">Browse iPhones</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MyAccount">MyAccount</a>
                         </li>
                         <li>
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                            <form class="form-inline my-2 my-lg-0" asp-action="Index" method="get">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="SearchString" value="@ViewData["CurrentFilter"]">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                <button class="btn btn-outline-secondary my-2 my-sm-0" asp-action="Index">Clear Search"</button>
+                            </form>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -48,7 +46,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    
+
+    <footer class="border-top footer text-muted text-center">
         <div class="container">
             <p>
             &copy; 2021 - Phone Selling Project - Developed by Louis Symons | 

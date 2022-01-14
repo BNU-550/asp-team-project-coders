@@ -20,9 +20,26 @@ namespace Phone_Selling_Project.Controllers
         }
 
         // GET: Explore
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
-            return View(await _context.Products.ToListAsync());
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "prod_name" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+            var products = from p in _context.Products
+                           select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.ProductName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.ProductName);
+                    break;
+            }
+            return View(await products.AsNoTracking().ToListAsync());
         }
 
         // GET: Explore/Details/5
