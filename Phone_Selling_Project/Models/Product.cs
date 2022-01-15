@@ -43,6 +43,8 @@ namespace Phone_Selling_Project.Models
         [Required(ErrorMessage ="Enter Ram size in Gbs"), Range(3, 16)]
         public String Ram { get; set; }
 
+        public List<Review> Reviews { get; set; }
+
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

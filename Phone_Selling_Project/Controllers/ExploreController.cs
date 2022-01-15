@@ -39,6 +39,7 @@ namespace Phone_Selling_Project.Controllers
                     products = products.OrderByDescending(s => s.ProductName);
                     break;
             }
+
             return View(await products.AsNoTracking().ToListAsync());
         }
 
@@ -56,6 +57,8 @@ namespace Phone_Selling_Project.Controllers
             {
                 return NotFound();
             }
+
+            product.Reviews = GetReviews(product.ID);
 
             return View(product);
         }
@@ -165,6 +168,20 @@ namespace Phone_Selling_Project.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.ID == id);
+        }
+
+        /// <summary>
+        /// Get Reviews for the product
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns>List of Reviews</returns>
+        public List<Review> GetReviews(int productID)
+        {
+
+            List<Review> PhoneReviews = new List<Review>();
+
+            PhoneReviews = _context.Reviews.Where(m => m.ProductID == productID).ToList();
+            return PhoneReviews;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿@model Phone_Selling_Project.Models.Product
 
+
 @{
     ViewData["Title"] = "Details";
 }
@@ -69,6 +70,29 @@
         </dd>
     </dl>
 </div>
+
+<div>
+    <hr />
+    <dl class="d-table-row bg-light" style="font-family: Arial, Helvetica, sans-serif">
+      
+        @{ foreach (var r in Model.Reviews)
+            {
+
+                @if (r.Text != null)
+                {
+                    <dt> @r.Text </dt>
+                }
+                else
+                {
+                    <dt> No Reivews Found Be the first to review it. </dt>
+                }
+            }
+        }
+
+    </dl>
+</div>
+
+
 <div>
     <a class="btn btn-outline-secondary" asp-action="Index">Back to Phones</a>
 </div>

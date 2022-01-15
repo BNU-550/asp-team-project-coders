@@ -25,6 +25,8 @@ namespace Phone_Selling_Project.Controllers
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             Content("Staff");
+
+
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "prod_name" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["CurrentFilter"] = searchString;
@@ -43,6 +45,9 @@ namespace Phone_Selling_Project.Controllers
                     break;
             }
             return View(await products.AsNoTracking().ToListAsync());
+
+            var applicationDbContext = _context.Reviews.Include(r => r.Person).Include(r => r.Product);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Products/Details/5
