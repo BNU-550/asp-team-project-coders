@@ -21,9 +21,10 @@ namespace Phone_Selling_Project.Controllers
         }
 
         // GET: Products
-        //[Authorize(Roles = "Staff")]
+        [Authorize(Roles = "Staff")]
         public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
+            Content("Staff");
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "prod_name" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
             ViewData["CurrentFilter"] = searchString;
@@ -63,7 +64,6 @@ namespace Phone_Selling_Project.Controllers
         }
 
         //[Authorize(Roles = "Staff")]
-        // GET: Products/Create
         public IActionResult Create()
         {
             return View();
