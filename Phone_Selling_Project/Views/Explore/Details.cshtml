@@ -75,16 +75,17 @@
     <hr />
     <dl class="d-table-row bg-light" style="font-family: Arial, Helvetica, sans-serif">
       
+        <dt class="col-sm-10">Reviews</dt>
         @{ foreach (var r in Model.Reviews)
             {
 
                 @if (r.Text != null)
                 {
-                    <dt> @r.Text </dt>
+                    <dt class="col-sm-2"> @r.Text </dt>
                 }
                 else
                 {
-                    <dt> No Reivews Found Be the first to review it. </dt>
+                    <dt> No Reviews Found Be the first to review it! </dt>
                 }
             }
         }
